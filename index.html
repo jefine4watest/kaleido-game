@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>KALEIDO · 万花筒男团</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.92);
+            backdrop-filter: blur(12px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ffffff, #a855f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        section {
+            padding: 100px 5% 80px;
+        }
+
+        .hero {
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at 30% 10%, #1a1a2e, #050505);
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: 6px;
+            background: linear-gradient(to right, #fff, #c084fc, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #aaa;
+            margin-top: 1rem;
+        }
+
+        .tagline {
+            margin-top: 2rem;
+            font-style: italic;
+            color: #a78bfa;
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .member-card {
+            background: #111;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 30px -15px rgba(0, 0, 0, 0.5);
+        }
+
+        .member-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(168, 85, 247, 0.4);
+            box-shadow: 0 25px 35px -12px rgba(168, 85, 247, 0.2);
+        }
+
+        .member-photo {
+            height: 280px;
+            background-size: cover;
+            background-position: center 30%;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .photo-overlay {
+            background: linear-gradient(to top, #000000cc, transparent);
+            width: 100%;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stage-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .member-info {
+            padding: 1.5rem;
+        }
+
+        .position {
+            color: #a855f7;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .sunshine-bio {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #bcbcbc;
+            margin-top: 0.5rem;
+        }
+
+        .album-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .album {
+            background: #0e0e12;
+            border-radius: 32px;
+            max-width: 380px;
+            padding: 1.8rem;
+            border: 1px solid #2a2a35;
+            transition: 0.2s;
+            cursor: default;
+        }
+
+        .album:hover {
+            border-color: #a855f7;
+            transform: scale(1.01);
+        }
+
+        .album-cover {
+            border-radius: 24px;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 专辑封面视觉差异化 */
+        .cover-mirror {
+            background: linear-gradient(135deg, #1a1a2e, #0d0d1a);
+            border: 1px solid #c084fc40;
+        }
+        .cover-findme {
+            background: linear-gradient(145deg, #fff8e7, #f5e6c8);
+            position: relative;
+        }
+        .day-night-split {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #ffd96666 0%, #ffd96666 50%, #1e2a5e66 50%, #1e2a5e66 100%);
+            pointer-events: none;
+        }
+        .album-cover i {
+            font-size: 3.8rem;
+            margin-bottom: 0.8rem;
+            z-index: 2;
+        }
+        .cover-mirror i {
+            color: #c084fc;
+        }
+        .cover-findme i {
+            color: #d97706;
+            text-shadow: 0 0 6px #fbbf24;
+        }
+        .album-title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        .visual-concept {
+            font-size: 0.85rem;
+            color: #d8b4fe;
+            text-align: center;
+            margin: 0.5rem 0 0.2rem;
+        }
+        .concept-desc {
+            font-size: 0.8rem;
+            color: #b9b9ce;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .tracklist {
+            list-style: none;
+            font-size: 0.85rem;
+            margin: 1rem 0;
+        }
+        .tracklist li {
+            padding: 0.3rem 0;
+            border-bottom: 1px dashed #2c2c36;
+            display: flex;
+            gap: 0.6rem;
+        }
+        .highlight-track {
+            color: #fbbf24;
+        }
+
+        .bubble-section {
+            background: linear-gradient(145deg, #0c0c10, #050508);
+        }
+        .bubble-container {
+            max-width: 550px;
+            margin: 2rem auto 0;
+            background: #0f0f14;
+            border-radius: 40px;
+            padding: 1.8rem;
+            border: 1px solid #2a2a35;
+            box-shadow: 0 20px 35px -10px black;
+        }
+        .chat-messages {
+            height: 380px;
+            overflow-y: auto;
+            padding-right: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .msg {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .msg-bubble {
+            background: #1c1c24;
+            padding: 0.75rem 1rem;
+            border-radius: 22px;
+            max-width: 80%;
+            color: #f0f0f0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .msg-bubble.me {
+            background: #7c3aed;
+            color: white;
+            margin-left: auto;
+            border-radius: 22px 22px 4px 22px;
+        }
+        .member-chat-selector {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 1.2rem;
+            justify-content: center;
+        }
+        .chat-btn {
+            background: #1e1e2a;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            color: #ddd;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .chat-btn.active, .chat-btn:hover {
+            background: #7c3aed;
+            color: white;
+        }
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input-area input {
+            flex: 1;
+            padding: 0.9rem 1rem;
+            border-radius: 50px;
+            border: none;
+            background: #20202a;
+            color: white;
+            outline: none;
+        }
+        .chat-input-area button {
+            background: #7c3aed;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+        }
+        .bubble-note {
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 1rem;
+            color: #6b6b7a;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.75rem;
+            border-top: 1px solid #1f1f28;
+            color: #5a5a6e;
+        }
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 2.8rem; }
+            .nav-links { gap: 1rem; }
+            section { padding: 80px 5% 60px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">KALEIDO</div>
+    <div class="nav-links">
+        <a href="#home">HOME</a>
+        <a href="#members">MEMBERS</a>
+        <a href="#albums">ALBUMS</a>
+        <a href="#bubble">BUBBLE</a>
+    </div>
+</nav>
+
+<main>
+    <section id="home" class="hero">
+        <div>
+            <h1>KALEIDO</h1>
+            <p>万花筒中，遇见无限光影</p>
+            <div class="tagline">✦ 2025 全新篇章《FIND REAL ME》即将到来 ✦</div>
+        </div>
+    </section>
+
+    <section id="members">
+        <h2 style="font-size: 2rem; margin-bottom: 1rem;">MEET ✦ KALEIDO</h2>
+        <p style="margin-bottom: 2rem; color: #aaa;">五色棱镜 · 折射温暖光芒</p>
+        <div class="members-grid" id="membersGrid"></div>
+    </section>
+
+    <section id="albums" style="background: #07070c;">
+        <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">DISCOGRAPHY</h2>
+        <p style="margin-bottom: 2rem;">视觉概念 · 日夜交织的灵魂回响</p>
+        <div class="album-container" id="albumList"></div>
+    </section>
+
+    <section id="bubble" class="bubble-section">
+        <h2 style="font-size: 2rem; text-align: center;">✨ BUBBLE ✨</h2>
+        <p style="text-align: center; margin-bottom: 1rem;">与成员1:1 私密聊天室 · 仿真实时对话</p>
+        <div class="bubble-container">
+            <div class="member-chat-selector" id="chatSelector"></div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="msg"><div class="msg-bubble">💜 嗨~ 我是KALEIDO的时雨，今天心情像蜜桃一样甜！</div></div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="发送消息... 成员会回复哦 💬">
+                <button id="sendMsgBtn"><i class="fas fa-paper-plane"></i> 发送</button>
+            </div>
+            <div class="bubble-note">💌 根据每位成员的性格阳光版自动回复 · 像真实Bubble一样温暖</div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 KALEIDO Entertainment. 万花筒中，万物皆有光。</p>
+</footer>
+
+<script>
+    // 阳光版官方人设
+    const membersData = [
+        { name: "时雨", stageName: "SHI YU", position: "视觉中心 · 副唱", bio: "来自南方的蜜桃少年，拥有宝石般闪耀的舞台表现力。温柔细腻，喜欢分享日常的小确幸，是团队里的治愈担当。", photoIcon: "fas fa-candy-cane", color: "#f9a8d4" },
+        { name: "林安", stageName: "LIN AN", position: "主唱 · 暖心大哥", bio: "嗓音如春风化雨，永远是成员最坚实的依靠。热爱音乐与生活，私下喜欢烹饪和弹吉他，带给粉丝无限温暖。", photoIcon: "fas fa-dove", color: "#a7f3d0" },
+        { name: "Jayden", stageName: "JAYDEN", position: "主舞 · 说唱", bio: "从街头到舞台，用汗水写就梦想。充满力量感的舞蹈和低音炮rap，私下却意外地喜欢小动物和星星。", photoIcon: "fas fa-star", color: "#fcd34d" },
+        { name: "姜一辰", stageName: "JIANG YICHEN", position: "队长 · 领舞", bio: "完美主义的全能队长，永远把团队放在第一位。细腻坚韧，用行动诠释责任与热爱。", photoIcon: "fas fa-crown", color: "#94a3f8" },
+        { name: "Seo Jin", stageName: "SEO JIN", position: "门面 · 副说唱", bio: "财阀家的小儿子，像漫画里走出的王子。单纯爱笑，正在努力提升实力，用真诚打动每一个人。", photoIcon: "fas fa-gem", color: "#fbcfe8" }
+    ];
+
+    // 专辑数据 —— 第二张改为 《FIND REAL ME》+ 日夜概念
+    const albums = [
+        {
+            title: "MIRROR, MIRROR",
+            release: "2024.04.01",
+            visual: "破碎镜面 / 双重人格美学",
+            conceptDesc: "主打歌〈两面〉以华丽黑暗与纯白光影对比，MV使用镜屋特效与幻象转场，视觉冲击力极强。",
+            tracks: ["1. 两面", "2. 棱镜", "3. 你的谎言", "4. 万花筒", "5. I See You"],
+            coverClass: "cover-mirror",
+            icon: "fas fa-compass"
+        },
+        {
+            title: "FIND REAL ME",
+            release: "2025.02.14",
+            visual: "☀️ 白天少年青春 / 🌙 晚上迷茫寻找方向",
+            conceptDesc: "主打歌〈破晓之前〉描绘Z世代在阳光下的朝气与夜晚孤独中的自我拉扯。概念照分‘日光版’与‘午夜版’，日记本、空荡房间、凌晨街道的视觉语言直击心灵。",
+            tracks: ["1. 破晓之前", "2. 白日梦游", "3. 凌晨三点的自白", "4. 未完成的信", "5. Find Real Me"],
+            coverClass: "cover-findme",
+            icon: "fas fa-sun"
+        }
+    ];
+
+    // 阳光Bubble回复库
+    const bubbleReplies = {
+        "时雨": [ "💕 今天吃了草莓蛋糕，超幸福！你也要好好吃饭哦~", "🌸 练习结束啦，粉丝们的应援我都有看到！真的非常感谢✨", "🎀 有没有听我们的新歌呀？我最爱副歌部分了，甜甜的~", "🥺 你是我今天的小幸运，要一直陪在KALEIDO身边好吗？", "📸 刚刚拍了几张自拍，但是想保密！嘻嘻，等回归~" ],
+        "林安": [ "☕ 在喝咖啡呢，今天首尔天气很好，希望你那里也是晴天~", "🍲 我煮了部队锅，成员们都说好吃，下次想给你也尝尝！", "🎤 练歌房待了一下午，你的鼓励是我最大的动力❤️", "📖 最近在读一本很温暖的诗集，有一句特别想分享给你~", "🤗 不管发生什么，我都会一直用歌声陪伴你。谢谢你的存在。" ],
+        "Jayden": [ "💪 今天编舞练习到很晚，但是想到舞台就不累了！", "🐱 练习室外面有只小猫，我偷偷喂了它，不要告诉别人嘿嘿~", "🌙 晚上的星星很好看，就像粉丝们的应援灯海，谢谢你照亮我。", "🎧 分享一首我最近单曲循环的歌，下次直播唱给你听！", "🔥 为了下一次回归，我一定拼尽全力！" ],
+        "姜一辰": [ "🏆 刚结束体能训练，身为队长要一直保持最好状态！", "💬 成员们今天都很努力，特别骄傲。我们的故事还在继续~", "📝 在写日记，记录和粉丝们珍贵的回忆。每一页都是你们。", "🎁 这次舞台准备了惊喜，一定要期待喔！", "💙 不管前路如何，我会一直守护KALEIDO和Prism们。" ],
+        "Seo Jin": [ "💰 今天爸爸问我累不累，我说因为有粉丝所以超级开心！", "🍰 公司楼下甜品店出了限定，我买了一大堆和大家分着吃啦~", "🎬 最近在努力练舞，被夸奖进步了！开心到转圈圈✨", "💎 你们是我的宝石，我也要变成更闪亮的人！", "😜 刚刚打游戏赢了时雨哥，嘿嘿，我很厉害吧？" ]
+    };
+
+    function renderMembers() {
+        const grid = document.getElementById('membersGrid');
+        grid.innerHTML = membersData.map(m => `
+            <div class="member-card">
+                <div class="member-photo" style="background: linear-gradient(145deg, #1a1a24, #0a0a10);">
+                    <div class="photo-overlay">
+                        <i class="${m.photoIcon}" style="font-size: 3rem; color: ${m.color}; text-shadow: 0 0 6px ${m.color};"></i>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <div class="stage-name">${m.stageName}</div>
+                    <div class="position">${m.position}</div>
+                    <div class="sunshine-bio">${m.bio}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderAlbums() {
+        const container = document.getElementById('albumList');
+        container.innerHTML = albums.map(alb => {
+            // 为 FIND REAL ME 增加一个日夜分割装饰
+            const specialEffect = alb.title === "FIND REAL ME" ? '<div class="day-night-split"></div>' : '';
+            return `
+            <div class="album">
+                <div class="album-cover ${alb.coverClass}" style="position: relative;">
+                    ${specialEffect}
+                    <i class="${alb.icon}"></i>
+                    <i class="fas fa-record-vinyl" style="font-size: 1.8rem; opacity: 0.7; margin-top: 4px;"></i>
+                </div>
+                <div class="album-title">${alb.title}</div>
+                <div class="visual-concept">🎨 视觉 · ${alb.visual}</div>
+                <div class="concept-desc">${alb.conceptDesc}</div>
+                <ul class="tracklist">
+                    ${alb.tracks.map((t, idx) => {
+                        const isTitle = idx === 0 && alb.title === "FIND REAL ME";
+                        return `<li><i class="fas fa-play" style="font-size: 0.6rem; align-self: center; color: #a855f7;"></i> ${t} ${isTitle ? '<span style="color:#fbbf24; margin-left:6px;">★ TITLE</span>' : ''}</li>`;
+                    }).join('')}
+                </ul>
+                <div style="font-size: 0.7rem; color: #7e7e8c;"><i class="far fa-calendar-alt"></i> ${alb.release}</div>
+            </div>`;
+        }).join('');
+    }
+
+    // Bubble 交互逻辑
+    let currentMember = "时雨";
+    let chatHistory = [];
+
+    function renderChatSelector() {
+        const selectorDiv = document.getElementById('chatSelector');
+        selectorDiv.innerHTML = membersData.map(m => `<button class="chat-btn ${m.name === currentMember ? 'active' : ''}" data-name="${m.name}">${m.stageName}</button>`).join('');
+        document.querySelectorAll('.chat-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                currentMember = btn.getAttribute('data-name');
+                renderChatSelector();
+                renderChatMessages();
+            });
+        });
+    }
+
+    function getRandomReply(memberName) {
+        const replies = bubbleReplies[memberName];
+        if (!replies) return "✨ 今天也要开心哦！我会继续加油的✨";
+        return replies[Math.floor(Math.random() * replies.length)];
+    }
+
+    function renderChatMessages() {
+        const container = document.getElementById('chatMessages');
+        if (chatHistory.length === 0) {
+            const welcome = getRandomReply(currentMember);
+            container.innerHTML = `<div class="msg"><div class="msg-bubble">💬 ${welcome}</div></div>`;
+        } else {
+            container.innerHTML = chatHistory.map(msg => {
+                if (msg.sender === 'user') return `<div class="msg"><div class="msg-bubble me">${msg.text}</div></div>`;
+                else return `<div class="msg"><div class="msg-bubble">✨ ${msg.text}</div></div>`;
+            }).join('');
+        }
+        const chatDiv = document.getElementById('chatMessages');
+        chatDiv.scrollTop = chatDiv.scrollHeight;
+    }
+
+    function addUserMessage(text) {
+        if (!text.trim()) return;
+        chatHistory.push({ sender: 'user', text: text });
+        const replyText = getRandomReply(currentMember);
+        setTimeout(() => {
+            chatHistory.push({ sender: 'member', text: replyText });
+            renderChatMessages();
+        }, 500);
+        renderChatMessages();
+    }
+
+    function initBubble() {
+        const inputBox = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendMsgBtn');
+        sendBtn.addEventListener('click', () => {
+            addUserMessage(inputBox.value);
+            inputBox.value = '';
+        });
+        inputBox.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                addUserMessage(inputBox.value);
+                inputBox.value = '';
+            }
+        });
+    }
+
+    renderMembers();
+    renderAlbums();
+    renderChatSelector();
+    initBubble();
+    renderChatMessages();
+</script>
+</body>
+</html>
