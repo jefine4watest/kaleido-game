@@ -120,8 +120,7 @@
 
         .member-photo {
             height: 280px;
-            background-size: cover;
-            background-position: center 30%;
+            background: linear-gradient(145deg, #1a1a24, #0a0a10);
             position: relative;
             display: flex;
             align-items: flex-end;
@@ -175,7 +174,6 @@
             padding: 1.8rem;
             border: 1px solid #2a2a35;
             transition: 0.2s;
-            cursor: default;
         }
 
         .album:hover {
@@ -196,15 +194,16 @@
             overflow: hidden;
         }
 
-        /* 专辑封面视觉差异化 */
         .cover-mirror {
             background: linear-gradient(135deg, #1a1a2e, #0d0d1a);
             border: 1px solid #c084fc40;
         }
+
         .cover-findme {
             background: linear-gradient(145deg, #fff8e7, #f5e6c8);
             position: relative;
         }
+
         .day-night-split {
             position: absolute;
             width: 100%;
@@ -212,140 +211,115 @@
             background: linear-gradient(to bottom, #ffd96666 0%, #ffd96666 50%, #1e2a5e66 50%, #1e2a5e66 100%);
             pointer-events: none;
         }
+
         .album-cover i {
             font-size: 3.8rem;
             margin-bottom: 0.8rem;
             z-index: 2;
         }
+
         .cover-mirror i {
             color: #c084fc;
         }
+
         .cover-findme i {
             color: #d97706;
             text-shadow: 0 0 6px #fbbf24;
         }
+
         .album-title {
             font-size: 1.7rem;
             font-weight: 700;
             text-align: center;
         }
+
         .visual-concept {
             font-size: 0.85rem;
             color: #d8b4fe;
             text-align: center;
             margin: 0.5rem 0 0.2rem;
         }
+
         .concept-desc {
             font-size: 0.8rem;
             color: #b9b9ce;
             text-align: center;
             margin-bottom: 1rem;
         }
+
         .tracklist {
             list-style: none;
             font-size: 0.85rem;
             margin: 1rem 0;
         }
+
         .tracklist li {
             padding: 0.3rem 0;
             border-bottom: 1px dashed #2c2c36;
             display: flex;
             gap: 0.6rem;
         }
-        .highlight-track {
-            color: #fbbf24;
-        }
 
         .bubble-section {
             background: linear-gradient(145deg, #0c0c10, #050508);
         }
-        .bubble-container {
-            max-width: 550px;
-            margin: 2rem auto 0;
-            background: #0f0f14;
-            border-radius: 40px;
-            padding: 1.8rem;
-            border: 1px solid #2a2a35;
-            box-shadow: 0 20px 35px -10px black;
+
+        .bubble-members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
         }
-        .chat-messages {
-            height: 380px;
-            overflow-y: auto;
-            padding-right: 8px;
-            margin-bottom: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .msg {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-        .msg-bubble {
-            background: #1c1c24;
-            padding: 0.75rem 1rem;
-            border-radius: 22px;
-            max-width: 80%;
-            color: #f0f0f0;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-        .msg-bubble.me {
-            background: #7c3aed;
-            color: white;
-            margin-left: auto;
-            border-radius: 22px 22px 4px 22px;
-        }
-        .member-chat-selector {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 1.2rem;
-            justify-content: center;
-        }
-        .chat-btn {
-            background: #1e1e2a;
-            border: none;
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
-            color: #ddd;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .chat-btn.active, .chat-btn:hover {
-            background: #7c3aed;
-            color: white;
-        }
-        .chat-input-area {
-            display: flex;
-            gap: 10px;
-        }
-        .chat-input-area input {
-            flex: 1;
-            padding: 0.9rem 1rem;
-            border-radius: 50px;
-            border: none;
-            background: #20202a;
-            color: white;
-            outline: none;
-        }
-        .chat-input-area button {
-            background: #7c3aed;
-            border: none;
-            padding: 0 1.5rem;
-            border-radius: 50px;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-        }
-        .bubble-note {
-            font-size: 0.7rem;
+
+        .bubble-entry-card {
+            background: #111;
+            border-radius: 32px;
+            padding: 2rem 1rem;
             text-align: center;
-            margin-top: 1rem;
-            color: #6b6b7a;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
+
+        .bubble-entry-card:hover {
+            transform: translateY(-8px);
+            border-color: #7c3aed;
+            background: #1a1a24;
+        }
+
+        .bubble-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(145deg, #1e1e2a, #0a0a10);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .bubble-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .bubble-stage {
+            font-size: 0.8rem;
+            color: #a855f7;
+            margin-bottom: 0.3rem;
+        }
+
+        .bubble-desc {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
         footer {
             text-align: center;
             padding: 2rem;
@@ -353,6 +327,7 @@
             border-top: 1px solid #1f1f28;
             color: #5a5a6e;
         }
+
         @media (max-width: 700px) {
             .hero h1 { font-size: 2.8rem; }
             .nav-links { gap: 1rem; }
@@ -393,12 +368,11 @@
         <div class="album-container" id="albumList"></div>
     </section>
 
-   < <section id="bubble">>
-<section id="bubble" class="bubble-section">
-    <h2 style="font-size: 2rem; text-align: center;">✨ BUBBLE ✨</h2>
-    <p style="text-align: center; margin-bottom: 2rem;">点击成员头像，进入1:1私密聊天室</p>
-    <div class="bubble-members-grid" id="bubbleMembersGrid"></div>
-</section>
+    <section id="bubble" class="bubble-section">
+        <h2 style="font-size: 2rem; text-align: center;">✨ BUBBLE ✨</h2>
+        <p style="text-align: center; margin-bottom: 2rem;">点击成员头像，进入1:1私密聊天室</p>
+        <div class="bubble-members-grid" id="bubbleMembersGrid"></div>
+    </section>
 </main>
 
 <footer>
@@ -406,7 +380,7 @@
 </footer>
 
 <script>
-    // 阳光版官方人设
+    // 成员数据
     const membersData = [
         { name: "时雨", stageName: "SHI YU", position: "视觉中心 · 副唱", bio: "来自南方的蜜桃少年，拥有宝石般闪耀的舞台表现力。温柔细腻，喜欢分享日常的小确幸，是团队里的治愈担当。", photoIcon: "fas fa-candy-cane", color: "#f9a8d4" },
         { name: "林安", stageName: "LIN AN", position: "主唱 · 暖心大哥", bio: "嗓音如春风化雨，永远是成员最坚实的依靠。热爱音乐与生活，私下喜欢烹饪和弹吉他，带给粉丝无限温暖。", photoIcon: "fas fa-dove", color: "#a7f3d0" },
@@ -415,7 +389,7 @@
         { name: "Seo Jin", stageName: "SEO JIN", position: "门面 · 副说唱", bio: "财阀家的小儿子，像漫画里走出的王子。单纯爱笑，正在努力提升实力，用真诚打动每一个人。", photoIcon: "fas fa-gem", color: "#fbcfe8" }
     ];
 
-    // 专辑数据 —— 第二张改为 《FIND REAL ME》+ 日夜概念
+    // 专辑数据
     const albums = [
         {
             title: "MIRROR, MIRROR",
@@ -430,27 +404,29 @@
             title: "FIND REAL ME",
             release: "2025.02.14",
             visual: "☀️ 白天少年青春 / 🌙 晚上迷茫寻找方向",
-            conceptDesc: "主打歌〈破晓之前〉描绘Z世代在阳光下的朝气与夜晚孤独中的自我拉扯。概念照分‘日光版’与‘午夜版’，日记本、空荡房间、凌晨街道的视觉语言直击心灵。",
-            tracks: ["1. 破晓之前", "2. 白日梦游", "3. 凌晨三点的自白", "4. 未完成的信", "5. Find Real Me"],
+            conceptDesc: "主打歌〈破晓之前〉描绘Z世代在阳光下的朝气与夜晚孤独中的自我拉扯。概念照分'日光版'与'午夜版'，日记本、空荡房间、凌晨街道的视觉语言直击心灵。",
+            tracks: ["1. 破晓之前 ★ TITLE", "2. 白日梦游", "3. 凌晨三点的自白", "4. 未完成的信", "5. Find Real Me"],
             coverClass: "cover-findme",
             icon: "fas fa-sun"
         }
     ];
 
-    // 阳光Bubble回复库
-    const bubbleReplies = {
-        "时雨": [ "💕 今天吃了草莓蛋糕，超幸福！你也要好好吃饭哦~", "🌸 练习结束啦，粉丝们的应援我都有看到！真的非常感谢✨", "🎀 有没有听我们的新歌呀？我最爱副歌部分了，甜甜的~", "🥺 你是我今天的小幸运，要一直陪在KALEIDO身边好吗？", "📸 刚刚拍了几张自拍，但是想保密！嘻嘻，等回归~" ],
-        "林安": [ "☕ 在喝咖啡呢，今天首尔天气很好，希望你那里也是晴天~", "🍲 我煮了部队锅，成员们都说好吃，下次想给你也尝尝！", "🎤 练歌房待了一下午，你的鼓励是我最大的动力❤️", "📖 最近在读一本很温暖的诗集，有一句特别想分享给你~", "🤗 不管发生什么，我都会一直用歌声陪伴你。谢谢你的存在。" ],
-        "Jayden": [ "💪 今天编舞练习到很晚，但是想到舞台就不累了！", "🐱 练习室外面有只小猫，我偷偷喂了它，不要告诉别人嘿嘿~", "🌙 晚上的星星很好看，就像粉丝们的应援灯海，谢谢你照亮我。", "🎧 分享一首我最近单曲循环的歌，下次直播唱给你听！", "🔥 为了下一次回归，我一定拼尽全力！" ],
-        "姜一辰": [ "🏆 刚结束体能训练，身为队长要一直保持最好状态！", "💬 成员们今天都很努力，特别骄傲。我们的故事还在继续~", "📝 在写日记，记录和粉丝们珍贵的回忆。每一页都是你们。", "🎁 这次舞台准备了惊喜，一定要期待喔！", "💙 不管前路如何，我会一直守护KALEIDO和Prism们。" ],
-        "Seo Jin": [ "💰 今天爸爸问我累不累，我说因为有粉丝所以超级开心！", "🍰 公司楼下甜品店出了限定，我买了一大堆和大家分着吃啦~", "🎬 最近在努力练舞，被夸奖进步了！开心到转圈圈✨", "💎 你们是我的宝石，我也要变成更闪亮的人！", "😜 刚刚打游戏赢了时雨哥，嘿嘿，我很厉害吧？" ]
-    };
+    // Bubble 成员入口
+    const bubbleMembers = [
+        { name: "时雨", stageName: "SHI YU", desc: "蜜桃少年 · 治愈系", icon: "fas fa-candy-cane", color: "#f9a8d4", file: "shiyu.html" },
+        { name: "林安", stageName: "LIN AN", desc: "暖心大哥 · 温柔声线", icon: "fas fa-dove", color: "#a7f3d0", file: "linan.html" },
+        { name: "Jayden", stageName: "JAYDEN", desc: "舞台王者 · 反转魅力", icon: "fas fa-star", color: "#fcd34d", file: "jayden.html" },
+        { name: "姜一辰", stageName: "JIANG YICHEN", desc: "全能队长 · 完美主义", icon: "fas fa-crown", color: "#94a3f8", file: "jiangyichen.html" },
+        { name: "Seo Jin", stageName: "SEO JIN", desc: "宝石门面 · 努力派", icon: "fas fa-gem", color: "#fbcfe8", file: "seojin.html" }
+    ];
 
+    // 渲染成员卡片
     function renderMembers() {
         const grid = document.getElementById('membersGrid');
+        if (!grid) return;
         grid.innerHTML = membersData.map(m => `
             <div class="member-card">
-                <div class="member-photo" style="background: linear-gradient(145deg, #1a1a24, #0a0a10);">
+                <div class="member-photo">
                     <div class="photo-overlay">
                         <i class="${m.photoIcon}" style="font-size: 3rem; color: ${m.color}; text-shadow: 0 0 6px ${m.color};"></i>
                     </div>
@@ -464,10 +440,11 @@
         `).join('');
     }
 
+    // 渲染专辑
     function renderAlbums() {
         const container = document.getElementById('albumList');
+        if (!container) return;
         container.innerHTML = albums.map(alb => {
-            // 为 FIND REAL ME 增加一个日夜分割装饰
             const specialEffect = alb.title === "FIND REAL ME" ? '<div class="day-night-split"></div>' : '';
             return `
             <div class="album">
@@ -480,72 +457,34 @@
                 <div class="visual-concept">🎨 视觉 · ${alb.visual}</div>
                 <div class="concept-desc">${alb.conceptDesc}</div>
                 <ul class="tracklist">
-                    ${alb.tracks.map((t, idx) => {
-                        const isTitle = idx === 0 && alb.title === "FIND REAL ME";
-                        return `<li><i class="fas fa-play" style="font-size: 0.6rem; align-self: center; color: #a855f7;"></i> ${t} ${isTitle ? '<span style="color:#fbbf24; margin-left:6px;">★ TITLE</span>' : ''}</li>`;
-                    }).join('')}
+                    ${alb.tracks.map(t => `<li><i class="fas fa-play" style="font-size: 0.6rem; align-self: center; color: #a855f7;"></i> ${t}</li>`).join('')}
                 </ul>
                 <div style="font-size: 0.7rem; color: #7e7e8c;"><i class="far fa-calendar-alt"></i> ${alb.release}</div>
             </div>`;
         }).join('');
     }
 
- .bubble-members-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 2rem;
-    max-width: 900px;
-    margin: 0 auto;
-}
+    // 渲染Bubble入口
+    function renderBubbleEntries() {
+        const grid = document.getElementById('bubbleMembersGrid');
+        if (!grid) return;
+        grid.innerHTML = bubbleMembers.map(m => `
+            <a href="bubble/${m.file}" class="bubble-entry-card">
+                <div class="bubble-avatar" style="border-color: ${m.color}80; border: 2px solid ${m.color}80;">
+                    <i class="${m.icon}" style="font-size: 3rem; color: ${m.color};"></i>
+                </div>
+                <div class="bubble-name">${m.name}</div>
+                <div class="bubble-stage">${m.stageName}</div>
+                <div class="bubble-desc">${m.desc}</div>
+                <div style="margin-top: 1rem; font-size: 0.7rem; color: #7c3aed;">💬 点击对话 →</div>
+            </a>
+        `).join('');
+    }
 
-.bubble-entry-card {
-    background: #111;
-    border-radius: 32px;
-    padding: 2rem 1rem;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
-.bubble-entry-card:hover {
-    transform: translateY(-8px);
-    border-color: #7c3aed;
-    background: #1a1a24;
-}
-
-.bubble-avatar {
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(145deg, #1e1e2a, #0a0a10);
-    border-radius: 50%;
-    margin: 0 auto 1rem;
-    display: flex;
- align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    border: 2px solid #7c3aed40;
-}
-
-.bubble-name {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 0.3rem;
-}
-
-.bubble-desc {
-    font-size: 0.8rem;
-    color: #888;
-}
-
+    // 初始化
     renderMembers();
     renderAlbums();
-    renderChatSelector();
-    initBubble();
-    renderChatMessages();
+    renderBubbleEntries();
 </script>
 </body>
 </html>
