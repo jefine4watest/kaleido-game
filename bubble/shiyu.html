@@ -21,11 +21,13 @@
         .msg { display: flex; gap: 12px; align-items: flex-start; }
         .msg-bubble { background: #1c1c24; padding: 0.75rem 1rem; border-radius: 22px; max-width: 80%; color: #f0f0f0; font-size: 0.9rem; line-height: 1.4; }
         .msg-bubble.me { background: #7c3aed; color: white; margin-left: auto; border-radius: 22px 22px 4px 22px; }
-        .chat-input-area { display: flex; gap: 10px; padding: 10px; background: #0f0f14; border-radius: 60px; border: 1px solid #2a2a35; }
-        .chat-input-area input { flex: 1; padding: 0.9rem 1rem; border-radius: 50px; border: none; background: #20202a; color: white; outline: none; }
-        .chat-input-area button { background: #7c3aed; border: none; padding: 0 1.5rem; border-radius: 50px; font-weight: bold; color: white; cursor: pointer; }
+        .chat-input-area { display: flex; gap: 10px; padding: 10px; background: #0f0f14; border-radius: 60px; border: 1px solid #2a2a35; margin-top: 10px; }
+        .chat-input-area input { flex: 1; padding: 0.9rem 1rem; border-radius: 50px; border: none; background: #20202a; color: white; outline: none; font-size: 0.9rem; }
+        .chat-input-area input::placeholder { color: #666; }
+        .chat-input-area button { background: #7c3aed; border: none; padding: 0 1.5rem; border-radius: 50px; font-weight: bold; color: white; cursor: pointer; transition: 0.2s; }
+        .chat-input-area button:hover { background: #6d28d9; }
         .action-buttons { display: flex; gap: 10px; margin-top: 10px; justify-content: center; }
-        .action-btn { background: #1e1e2a; border: none; padding: 8px 16px; border-radius: 50px; color: #aaa; cursor: pointer; font-size: 0.75rem; }
+        .action-btn { background: #1e1e2a; border: none; padding: 8px 16px; border-radius: 50px; color: #aaa; cursor: pointer; font-size: 0.75rem; transition: 0.2s; }
         .action-btn:hover { background: #2a2a35; color: white; }
         .chat-messages::-webkit-scrollbar { width: 5px; }
         .chat-messages::-webkit-scrollbar-track { background: #1a1a24; }
@@ -34,30 +36,49 @@
     </style>
 </head>
 <body>
-<a href="../index.html#bubble" class="back-btn"><i class="fas fa-arrow-left"></i> 返回</a>
-<button class="api-settings" onclick="resetApiKey()"><i class="fas fa-key"></i> API设置</button>
+<a href="../index.html#bubble" class="back-btn"><i class="fas fa-arrow-left"></i> 返回主页</a>
+<button class="api-settings" onclick="resetApiKey()"><i class="fas fa-key"></i> 设置API Key</button>
+
 <div class="chat-container">
     <div class="chat-header">
         <h1>🍑 时雨</h1>
-        <p>💬 与 SHI YU 的私密聊天室 · 实时AI对话</p>
-        <div style="font-size: 0.7rem; margin-top: 5px;" id="apiStatus">🔌 检查连接中...</div>
+        <p>💬 与 SHI YU 的聊天室 · 请发送消息吧</p>
+        <div style="font-size: 0.7rem; margin-top: 8px;" id="apiStatus">🔌 检查连接中...</div>
     </div>
-    <div class="chat-messages" id="chatMessages"></div>
+    
+    <div class="chat-messages" id="chatMessages">
+        <div class="msg"><div class="msg-bubble">🌸 你好呀~ 我是时雨！今天也想和你聊聊天呢✨</div></div>
+    </div>
+    
     <div class="chat-input-area">
         <input type="text" id="chatInput" placeholder="给时雨发消息吧 💬" autocomplete="off">
         <button id="sendBtn"><i class="fas fa-paper-plane"></i> 发送</button>
     </div>
+    
     <div class="action-buttons">
-        <button class="action-btn" onclick="clearHistory('时雨')"><i class="fas fa-trash-alt"></i> 清空记录</button>
+        <button class="action-btn" onclick="clearHistory('时雨')"><i class="fas fa-trash-alt"></i> 清空聊天记录</button>
     </div>
 </div>
+
 <script src="../js/bubble-common.js"></script>
 <script>
     const MEMBER_NAME = '时雨';
-    document.addEventListener('DOMContentLoaded', () => {
+    
+    document.addEventListener('DOMContentLoaded', function() {
         initBubblePage(MEMBER_NAME);
-        document.getElementById('sendBtn').addEventListener('click', () => sendMessage(MEMBER_NAME));
-        document.getElementById('chatInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(MEMBER_NAME); });
+        
+        const sendBtn = document.getElementById('sendBtn');
+        const input = document.getElementById('chatInput');
+        
+        sendBtn.addEventListener('click', function() {
+            sendMessage(MEMBER_NAME);
+        });
+        
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage(MEMBER_NAME);
+            }
+        });
     });
 </script>
 </body>
