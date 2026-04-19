@@ -490,7 +490,56 @@
         }).join('');
     }
 
- 
+ .bubble-members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.bubble-entry-card {
+    background: #111;
+    border-radius: 32px;
+    padding: 2rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.bubble-entry-card:hover {
+    transform: translateY(-8px);
+    border-color: #7c3aed;
+    background: #1a1a24;
+}
+
+.bubble-avatar {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(145deg, #1e1e2a, #0a0a10);
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+ align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    border: 2px solid #7c3aed40;
+}
+
+.bubble-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.bubble-desc {
+    font-size: 0.8rem;
+    color: #888;
+}
 
     renderMembers();
     renderAlbums();
