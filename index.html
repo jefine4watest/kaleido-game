@@ -393,21 +393,12 @@
         <div class="album-container" id="albumList"></div>
     </section>
 
-    <section id="bubble" class="bubble-section">
-        <h2 style="font-size: 2rem; text-align: center;">✨ BUBBLE ✨</h2>
-        <p style="text-align: center; margin-bottom: 1rem;">与成员1:1 私密聊天室 · 仿真实时对话</p>
-        <div class="bubble-container">
-            <div class="member-chat-selector" id="chatSelector"></div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="msg"><div class="msg-bubble">💜 嗨~ 我是KALEIDO的时雨，今天心情像蜜桃一样甜！</div></div>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" id="chatInput" placeholder="发送消息... 成员会回复哦 💬">
-                <button id="sendMsgBtn"><i class="fas fa-paper-plane"></i> 发送</button>
-            </div>
-            <div class="bubble-note">💌 根据每位成员的性格阳光版自动回复 · 像真实Bubble一样温暖</div>
-        </div>
-    </section>
+   < <section id="bubble">>
+<section id="bubble" class="bubble-section">
+    <h2 style="font-size: 2rem; text-align: center;">✨ BUBBLE ✨</h2>
+    <p style="text-align: center; margin-bottom: 2rem;">点击成员头像，进入1:1私密聊天室</p>
+    <div class="bubble-members-grid" id="bubbleMembersGrid"></div>
+</section>
 </main>
 
 <footer>
@@ -499,68 +490,7 @@
         }).join('');
     }
 
-    // Bubble 交互逻辑
-    let currentMember = "时雨";
-    let chatHistory = [];
-
-    function renderChatSelector() {
-        const selectorDiv = document.getElementById('chatSelector');
-        selectorDiv.innerHTML = membersData.map(m => `<button class="chat-btn ${m.name === currentMember ? 'active' : ''}" data-name="${m.name}">${m.stageName}</button>`).join('');
-        document.querySelectorAll('.chat-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                currentMember = btn.getAttribute('data-name');
-                renderChatSelector();
-                renderChatMessages();
-            });
-        });
-    }
-
-    function getRandomReply(memberName) {
-        const replies = bubbleReplies[memberName];
-        if (!replies) return "✨ 今天也要开心哦！我会继续加油的✨";
-        return replies[Math.floor(Math.random() * replies.length)];
-    }
-
-    function renderChatMessages() {
-        const container = document.getElementById('chatMessages');
-        if (chatHistory.length === 0) {
-            const welcome = getRandomReply(currentMember);
-            container.innerHTML = `<div class="msg"><div class="msg-bubble">💬 ${welcome}</div></div>`;
-        } else {
-            container.innerHTML = chatHistory.map(msg => {
-                if (msg.sender === 'user') return `<div class="msg"><div class="msg-bubble me">${msg.text}</div></div>`;
-                else return `<div class="msg"><div class="msg-bubble">✨ ${msg.text}</div></div>`;
-            }).join('');
-        }
-        const chatDiv = document.getElementById('chatMessages');
-        chatDiv.scrollTop = chatDiv.scrollHeight;
-    }
-
-    function addUserMessage(text) {
-        if (!text.trim()) return;
-        chatHistory.push({ sender: 'user', text: text });
-        const replyText = getRandomReply(currentMember);
-        setTimeout(() => {
-            chatHistory.push({ sender: 'member', text: replyText });
-            renderChatMessages();
-        }, 500);
-        renderChatMessages();
-    }
-
-    function initBubble() {
-        const inputBox = document.getElementById('chatInput');
-        const sendBtn = document.getElementById('sendMsgBtn');
-        sendBtn.addEventListener('click', () => {
-            addUserMessage(inputBox.value);
-            inputBox.value = '';
-        });
-        inputBox.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                addUserMessage(inputBox.value);
-                inputBox.value = '';
-            }
-        });
-    }
+ 
 
     renderMembers();
     renderAlbums();
