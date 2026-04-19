@@ -41,7 +41,7 @@ function updateApiStatus(isValid) {
 }
 
 function showApiModal() {
-    const key = prompt('🔑 请输入 DeepSeek API Key\n\n获取地址：https://platform.deepseek.com\n\n（API Key 只会保存在你的浏览器中，不会上传到任何服务器）');
+    const key = prompt('sk-8bf021c3ab5d42fb94e6f281644ac161');
     if (key && key.startsWith('sk-')) {
         apiKey = key;
         localStorage.setItem('deepseek_api_key', key);
@@ -144,7 +144,7 @@ async function sendMessage(memberName) {
         
     } catch (error) {
         removeLoading(loadingId);
-        console.error('API调用失败:', error);
+        console.error('艺人现在不在哦，请稍后发送消息:', error);
         
         let errorMsg = '抱歉，我现在有点忙，请稍后再试~';
         if (error.message.includes('401')) {
@@ -153,7 +153,7 @@ async function sendMessage(memberName) {
             apiKey = '';
             showApiModal();
         } else if (error.message.includes('429')) {
-            errorMsg = '调用太频繁啦，请稍等一会儿再聊~';
+            errorMsg = '艺人现在不在哦，请稍后发送消息~';
         } else if (error.message.includes('fetch')) {
             errorMsg = '网络连接失败，请检查网络后重试~';
         }
